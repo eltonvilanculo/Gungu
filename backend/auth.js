@@ -1,16 +1,23 @@
-const use_display = document.getElementById('logged_users') ;
-hide(use_display)
+// const use_display = document.getElementById('logged_users') ;
+
+var database = firebase.database();
+// hide(use_display)
 verifyUser() ;
+// const phone = document.getElementById('reg_phone').value ;
 function userRegisterListenner() {
 
-    const email = document.getElementById('reg_email').value ;
-    const phone = document.getElementById('reg_phone').value ;
-    const password = document.getElementById('reg_password').value ;
-    const password2 = document.getElementById('reg_password2').value ;
+    const email = document.getElementById('your-email').value ;
+
+    const password = document.getElementById('password').value ;
+
+
+    //const password2 = document.getElementById('reg_password2').value ;
 
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
 
+
         attemptLogin(email,password)
+
 
 
     }).catch(function(error) {
@@ -28,13 +35,9 @@ function userRegisterListenner() {
 
 }
 
-function attemptLogin(email , password) {
+ function attemptLogin(email , password) {
     firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
-
-
-        const user = verifyUser() ;
-
-        console.log(user)
+        Alert('logado com suesso !')
 
     }).catch(function(error) {
         // Handle Errors here.
@@ -58,17 +61,35 @@ function verifyUser() {
             var isAnonymous = user.isAnonymous;
             var uid = user.uid;
             var providerData = user.providerData;
-            use_display.innerText = email ;
-            show(use_display)
-            return user ;
+            //use_display.innerText = email ;
+            // show(use_display)
+            //           console.log(user.uid)
+            user.updateProfile({
+                displayName: name,
+                phoneNumber: document.getElementById('your-phone')
+            }).then(function() {
+
+                writeUserData(user.uid , email , document.getElementById('your-phone').value , document.getElementById('full-name').value)
+
+                console.log(user)
+
+                // Update successful.
+            }).catch(function(error) {
+
+                console.log(error)
+                // An error happened.
+            });
+
             // ...
         } else {
 
-            return null ;
+            // hide(use_display)
+
             // User is signed out.
             // ...
         }
     });
+
 
 }
 
@@ -89,4 +110,15 @@ function show(element) {
 
 
 }
+async function writeUserData(userId, email , phone,name) {
 
+    firebase.database().ref('users/' + userId).set({
+        id:await userId,
+        email: email,
+        phone : phone ,
+        displayName: name
+
+    });
+
+
+}

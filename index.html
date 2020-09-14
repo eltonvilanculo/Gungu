@@ -20,6 +20,7 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
 
     <script>
         // Your web app's Firebase configuration
@@ -216,7 +217,7 @@
         </div>
         <div class="row d-flex ">
 
-            <div class="col-md-4 container d-flex justify-content-center">
+            <div class="col-md-4 container d-flex justify-content-center" data-toggle="modal" data-target="#exampleModal">
                 <a class="btn btn-primary"><i class="fas fa-money-check-alt left"></i>Comprar</a>
 
             </div>
@@ -522,6 +523,8 @@
                     <!--/.Panel 8-->
                 </div>
 
+
+
             </div>
         </div>
         <!--/.Content-->
@@ -530,10 +533,62 @@
 <!--Modal: Login / Register Form-->
 
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pagamento do bilhete:Mulheres de Fibra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+<!--               TODO:-->
+                <div class="md-form form-sm mb-5">
+
+                    <input type="text" id="name_pay" class="form-control form-control-sm validate">
+
+                </div>
+
+                <div class="md-form form-sm mb-5">
+
+                    <input type="text" id="email_pay" class="form-control form-control-sm validate">
+
+                </div>
+                <div class="md-form form-sm mb-5">
+
+                    <input type="text" id="phone_pay" class="form-control form-control-sm validate">
+
+                </div>
+                <div class="md-form form-sm mb-5">
+
+                    <div class="row">
+                        <div class="col-md-6 ml-2"> <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="payment_select">
+                            <label class="custom-control-label" for="payment_select">Normal (250MT)</label>
+                        </div></div>
+                        <div class="col-md-5"> <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">VIP (800MT)</label>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="payListenner()">Prosseguir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="./node_modules/mdbootstrap/js/jquery.min.js"></script>
 <script src="./node_modules/mdbootstrap/js/popper.min.js"></script>
 <script src="./node_modules/mdbootstrap/js/bootstrap.min.js"></script>
 <script src="./node_modules/mdbootstrap/js/mdb.js"></script>
-<script src="./backend/auth.js"></script>
+<script src="./backend/payment.js"></script>
+
 </body>
 </html>
